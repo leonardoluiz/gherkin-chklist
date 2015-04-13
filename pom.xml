@@ -17,7 +17,8 @@
 	<artifactId>poi</artifactId>
 	<version>3.11</version>
 </dependency>
-  </dependencies>
+</dependencies>
+<build>
   <plugins>
     <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -27,5 +28,6 @@
             <target>1.8</target>
         </configuration>
     </plugin>
- </plugins> 
+ </plugins>
+ </build> 
 </project>
