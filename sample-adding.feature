@@ -1,8 +1,6 @@
-# encoding: utf-8
-
 Feature: Adding
 
-This feature is relative to adding numbers 
+This feature is relative to adding numbers
 
   Scenario: Add two positive numbers
 

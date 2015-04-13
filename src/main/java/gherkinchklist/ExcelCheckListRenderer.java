@@ -3,6 +3,7 @@ package gherkinchklist;
 import gherkinchklist.model.Checklist;
 import gherkinchklist.model.FeatureScenario;
 
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
@@ -13,6 +14,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.util.CellRangeAddress;
 
 /**
  * A render for a simple ms-excel based checklist
@@ -41,6 +43,8 @@ public class ExcelCheckListRenderer {
 
 	public void render(Checklist model) {
 		sheet = workbook.createSheet(model.getFeature());
+		sheet.setColumnWidth(0, 16*256);
+		sheet.setColumnWidth(1, 80*256);
 		// Header
 		cellWrite(0, 0, String.format(Messages.get("model.feature")));
 		cellWrite(0, 1, String.format(model.getFeature()));
@@ -49,22 +53,24 @@ public class ExcelCheckListRenderer {
 		cellWrite(2, 0, Messages.get("model.scenario"));
 		cellWrite(2, 1, Messages.get("model.status"));
 		// Items
-		int i = 4;
+		int i = 3;
 		for (FeatureScenario scenario : model.getScenarios()) {
 			cellWrite(i, 0, scenario.getName());
+			sheet.addMergedRegion(new CellRangeAddress(i, i, 0, 1));
 			i++;
 		}
 		saveWorkbook();
 	}
 
-	private void cellWrite(int line, int column, String text) {
+	private Cell cellWrite(int line, int column, String text) {
 		Cell cell = getCell(line, column);
 		cell.setCellValue(text);
+		return cell;
 	}
 
 	private Cell getCell(int line, int column) {
 		Cell cell = null;
-		Map<Integer,Cell> cellMap = cells.get(column);
+		Map<Integer,Cell> cellMap = cells.get(line);
 		if (cellMap == null) {
 			cellMap = new HashMap<Integer, Cell>();
 		}
@@ -88,8 +94,10 @@ public class ExcelCheckListRenderer {
 	private void saveWorkbook() {
 		try (FileOutputStream out = new FileOutputStream(filePath)) {
 			workbook.write(out);
+		} catch (FileNotFoundException e) {
+			Main.fatal(Messages.get("app.fileoutnotfound"));			
 		} catch (IOException e) {
-			throw new RuntimeException(Messages.get("error.save"));
+			Main.fatal(Messages.get("error.save"));
 		}
 	}
 }
