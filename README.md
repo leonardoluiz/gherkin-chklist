@@ -1,22 +1,21 @@
 # gherkin-chklist
-A basic checklist generator for Gherkin feature files (Cucumber).
+## A basic checklist generator for Gherkin feature files (Cucumber).
 
 This project is a POC for generation of artifacts based on Gherkin file format.
 Given a .feture file a Excel (xls) worksheet is created.
 
-You will need JDK 8.
+*You will need JDK 8.*
 
-Usage:
+##Usage:
 
-Clone:	$ git clone https://github.com/leonardoluiz/gherkin-chklist.git
-Bluid:	$ cd gherkin-chklist
+* Clone:	$ git clone https://github.com/leonardoluiz/gherkin-chklist.git
+* Bluid:	$ cd gherkin-chklist
 		$ mvn clean package
-Run:	$ java -jar target/ghklist.jar  sample-adding.feature adding.xls
+* Run:	$ java -jar target/ghklist.jar  sample-adding.feature adding.xls
 
-sample-adding.feature:
+###sample-adding.feature:
 
-Feature: Adding
-
+<pre>
 This feature is relative to adding numbers
 
   Scenario: Add two positive numbers
@@ -31,10 +30,11 @@ This feature is relative to adding numbers
     When and calculator is run
     Then the output should be "-2"    
 
-adding.xls:
+</pre>
+###adding.xls:
 
 ![Example output](https://cloud.githubusercontent.com/assets/865039/7125130/ca9ff3b6-e204-11e4-8eb5-86c657ac2159.png)
 
 
-For reference:
+###For reference: 
 https://github.com/cucumber/cucumber/wiki/Feature-Introduction
