@@ -2,14 +2,14 @@
 ## A basic checklist generator for Gherkin feature files (Cucumber).
 
 This project is a POC for generation of artifacts based on Gherkin file format.
-Given a .feture file a Excel (xls) worksheet is created.
+Given a .feature file a Excel (xls) worksheet is created.
 
 *You will need JDK 8.*
 
 ##Usage:
 
 * Clone:	$ git clone https://github.com/leonardoluiz/gherkin-chklist.git
-* Bluid:	$ cd gherkin-chklist
+* Build:	$ cd gherkin-chklist
 		$ mvn clean package
 * Run:	$ java -jar target/ghklist.jar  sample-adding.feature adding.xls
 
